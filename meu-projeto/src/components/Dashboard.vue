@@ -29,6 +29,14 @@
                 </tr>
                 </tbody>
             </table>
-            </main>
-    </div>
+            <div>
+        <h2>Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
+      </div>
+
+      <div>
+        <h3>Vendas Mensais</h3>
+        <canvas id="vendasMensais"></canvas>
+      </div>
+    </main>
+  </div>
 </template>
