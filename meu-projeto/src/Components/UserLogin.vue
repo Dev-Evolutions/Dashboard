@@ -21,6 +21,8 @@
 
 <script>
 
+import Dashboard from './Dashboard.vue';
+
 export default {
     data() {
         return {
@@ -37,7 +39,10 @@ export default {
                 alert('Credenciais inválidas.');
             }
         }
-    }
+    },
+    components: {
+    Dashboardd
+  }
     
 };
 </script>
