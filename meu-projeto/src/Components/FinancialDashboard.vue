@@ -2,7 +2,7 @@
   <div>
     <header>
       <h1>Dashboard Financeiro - Exprezzo Cafeteria</h1>
-      <img src="@/assets/logo_cafe_com_escrita_exprezzo.png" alt="Logo da Exprezzo Cafeteria"/>
+      <img src="" alt="Logo da Exprezzo Cafeteria"/>
     </header>
 
     <main>
@@ -23,12 +23,7 @@
             <td>
               <input type="number" v-model="entrada.quantidade" />
             </td>
-            <td>
-              <input type="number" v-model="entrada.valor" />
-            </td>
-            <td>
-              <button @click="removerEntrada(index)">Remover</button>
-            </td>
+            <td>{{ entrada.valor }}</td>
           </tr>
           <tr v-for="(saida, index) in saidas" :key="index">
             <td>{{ saida.descricao }}</td>
@@ -36,12 +31,7 @@
             <td>
               <input type="number" v-model="saida.quantidade" />
             </td>
-            <td>
-              <input type="number" v-model="saida.valor" />
-            </td>
-            <td>
-              <button @click="removerSaida(index)">Remover</button>
-            </td>
+            <td>{{ saida.valor }}</td>
           </tr>
         </tbody>
       </table>
@@ -118,12 +108,6 @@ export default {
           }
         }
       });
-    },
-    removerEntrada(index) {
-      this.entradas.splice(index, 1);
-    },
-    removerSaida(index) {
-      this.saidas.splice(index, 1);
     }
   }
 };

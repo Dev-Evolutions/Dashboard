@@ -18,12 +18,12 @@
         </form>
     </div>
     <div v-else>
-        <Dashboard/>
+        <FinancialDashboard/>
     </div>
 </template>
 
 <script>
-import Dashboard from './Dashboard.vue';
+import FinancialDashboard from './FinancialDashboard.vue';
 
 export default {
     data() {
@@ -43,7 +43,7 @@ export default {
         }
     },
     components: {
-    Dashboard
+    FinancialDashboard
   }
     
 };
