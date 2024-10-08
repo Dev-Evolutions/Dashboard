@@ -13,24 +13,39 @@
             <th>Tipo</th>
             <th>Quantidade</th> 
             <th>Valor (R$)</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(entrada, index) in entradas" :key="index">
             <td>{{ entrada.descricao }}</td>
             <td>Entrada</td>
-            <td>{{ entrada.quantidade }}</td> 
-            <td>{{ entrada.valor }}</td>
+            <td>
+              <input type="number" v-model="entrada.quantidade" />
+            </td>
+            <td>
+              <input type="number" v-model="entrada.valor" />
+            </td>
+            <td>
+              <button @click="removerEntrada(index)">Remover</button>
+            </td>
           </tr>
           <tr v-for="(saida, index) in saidas" :key="index">
             <td>{{ saida.descricao }}</td>
             <td>Saída</td>
-            <td>{{ saida.quantidade }}</td> 
-            <td>{{ saida.valor }}</td>
+            <td>
+              <input type="number" v-model="saida.quantidade" />
+            </td>
+            <td>
+              <input type="number" v-model="saida.valor" />
+            </td>
+            <td>
+              <button @click="removerSaida(index)">Remover</button>
+            </td>
           </tr>
         </tbody>
       </table>
-      
+
       <div>
         <h2>Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
       </div>
@@ -103,7 +118,16 @@ export default {
           }
         }
       });
+    },
+    removerEntrada(index) {
+      this.entradas.splice(index, 1);
+    },
+    removerSaida(index) {
+      this.saidas.splice(index, 1);
     }
   }
 };
 </script>
+
+<style>
+</style>
