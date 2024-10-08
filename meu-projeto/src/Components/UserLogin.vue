@@ -15,6 +15,7 @@
             <button type="submit" class="w-[70%] bg-white text-red-950 py-2 px-2 border-2 border-gray-300 rounded-md hover:bg-gray-300 mt-7">
                 Entrar
             </button>
+            <img src="logo_cafe_com_escrita.png" alt="Exprezzo Cafe">
         </form>
     </div>
     <div v-else>
@@ -51,6 +52,6 @@ export default {
 
 <style scoped>
 .bg-red-950 {
-    background-color: #3b1f1f; /* Cor marrom escura */
+    background-color: #3b1f1f;
 }
 </style>
