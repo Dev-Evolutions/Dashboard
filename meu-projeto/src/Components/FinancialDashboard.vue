@@ -1,48 +1,57 @@
 <template>
-  <div>
-    <header>
-      <h1>Dashboard Financeiro - Exprezzo Cafeteria</h1>
-      <img src="caminho/para/logo.png" alt="Logo da Exprezzo Cafeteria" />
+  <div class="flex flex-col h-screen">
+    <header class="p-2">
+      <h1 class="text-lg">Dashboard Financeiro - Exprezzo Cafeteria</h1>
+      <img src="" alt="Logo da Exprezzo Cafeteria" class="w-16 h-16" />
     </header>
 
-    <main>
-      <div></div>
-      <table id="table-entradas-saidas" class="flex flex-col">
-        <thead>
-          <tr class="text-md flex flex-row bg-gray-200">
-            <th>Descrição</th>
-            <th>Tipo</th>
-            <th>Quantidade</th> 
-            <th>Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(entrada, index) in entradas" :key="index" class="bg-green-100 flex flex-row pt-2 text-center " id="entradas">
-            <td class="w-24 h-12">{{ entrada.descricao }}</td>
-            <td class="w-24 h-12">Entrada</td>
-            <td class="w-24 h-12">
-              <input type="number" v-model.number="entrada.quantidade" class="w-12 text-center"/>
-            </td>
-            <td class="w-24 h-12">{{ (entrada.preco * entrada.quantidade).toFixed(2) }} R$</td>
-          </tr>
-          <tr v-for="(saida, index) in saidas" :key="index" class="bg-red-100 flex flex-row pt-2 text-center">
-            <td class="w-24 h-12">{{ saida.descricao }}</td>
-            <td class="w-24 h-12">Saída</td>
-            <td class="w-24 h-12">
-              <input type="number" v-model.number="saida.quantidade" class="w-12 text-center"/>
-            </td>
-            <td class="w-24 h-12">{{ (saida.preco * saida.quantidade).toFixed(2) }} R$</td>
-          </tr>
-        </tbody>
-      </table>
+    <main class="flex flex-1 overflow-hidden">
+      
+      <aside class="w-1/3 md:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
+        <img src="" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
+        <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
+        <p class="text-xs text-gray-300 mb-2">Administrador</p>
+        <button @click="logout" class="bg-green-500 text-white text-xs px-3 py-1 rounded mt-1 hover:bg-green-600">Sair</button>
+      </aside>
 
-      <div class="mt-8 flex justify-center">
-        <h2 class="text-xl font-bold text-green-600">Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
-      </div>
+      <div class="flex-grow p-1 overflow-auto">
+        <table id="table-entradas-saidas" class="w-full max-w-md text-xs"> <!-- Tamanho da fonte reduzido -->
+          <thead>
+            <tr class="text-xs bg-gray-200">
+              <th class="text-left p-1 w-1/3">Descrição</th>
+              <th class="text-left p-1 w-1/4">Tipo</th>
+              <th class="text-left p-1 w-1/4">Quantidade</th>
+              <th class="text-left p-1 w-1/4">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(entrada, index) in entradas" :key="index" class="bg-green-100 text-center">
+              <td class="p-1">{{ entrada.descricao }}</td>
+              <td class="p-1">Entrada</td>
+              <td class="p-1">
+                <input type="number" v-model.number="entrada.quantidade" class="w-14 text-center text-xs p-1"/> <!-- Largura e padding do input reduzidos -->
+              </td>
+              <td class="p-1">{{ (entrada.valor * entrada.quantidade).toFixed(2) }} R$</td>
+            </tr>
+            <tr v-for="(saida, index) in saidas" :key="index" class="bg-red-100 text-center">
+              <td class="p-1">{{ saida.descricao }}</td>
+              <td class="p-1">Saída</td>
+              <td class="p-1">
+                <input type="number" v-model.number="saida.quantidade" class="w-14 text-center text-xs p-1"/> <!-- Largura e padding do input reduzidos -->
+              </td>
+              <td class="p-1">{{ (saida.valor * saida.quantidade).toFixed(2) }} R$</td>
+            </tr>
+          </tbody>
+        </table>
 
-      <div class="mt-8">
-        <h3 class="bg-red-950 text-white py-4 rounded-lg flex justify-center items-center text-2xl font-bold">Vendas Mensais</h3>
-        <canvas id="vendasMensais"></canvas>
+        <div class="mt-2 flex justify-center">
+          <h2 class="text-xs font-bold text-green-600">Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
+        </div>
+
+        <div class="mt-2">
+          <h3 class="bg-red-950 text-white py-1 rounded-lg flex justify-center items-center text-sm font-bold">Vendas Mensais</h3>
+          <canvas id="vendasMensais" class="w-full h-32"></canvas> <!-- Altura do gráfico ajustada -->
+        </div>
       </div>
     </main>
   </div>
@@ -55,28 +64,32 @@ export default {
   data() {
     return {
       entradas: [
-        { descricao: "Venda de Café", preco: 15, quantidade: 200 },
-        { descricao: "Venda de Produtos", preco: 20, quantidade: 500 },
-        { descricao: "Serviços Extras", preco: 50, quantidade: 150 }
+        { descricao: "Venda de Café", valor: 15, quantidade: 200 },
+        { descricao: "Venda de Produtos", valor: 30, quantidade: 500 },
+        { descricao: "Serviços Extras", valor: 50, quantidade: 150 }
       ],
       saidas: [
-        { descricao: "Compra de Ingredientes", preco: 40, quantidade: 100 },
-        { descricao: "Manutenção", preco: 400, quantidade: 5 },
-        { descricao: "Salários", preco: 150, quantidade: 20 }
+        { descricao: "Compra de Ingredientes", valor: 20, quantidade: 100 },
+        { descricao: "Manutenção", valor: 200, quantidade: 5 },
+        { descricao: "Salários", valor: 300, quantidade: 20 }
       ]
     };
   },
   computed: {
     saldo() {
-      const totalEntradas = this.entradas.reduce((total, entrada) => total + (entrada.preco * entrada.quantidade), 0);
-      const totalSaidas = this.saidas.reduce((total, saida) => total + (saida.preco * saida.quantidade), 0);
-      return (totalEntradas - totalSaidas).toFixed(2);
+      const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor * entrada.quantidade, 0);
+      const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor * saida.quantidade, 0);
+      return totalEntradas - totalSaidas;
     }
   },
   mounted() {
     this.renderChart();
   },
   methods: {
+    logout() {
+      // Lógica para sair do sistema
+      alert('Você saiu do sistema!');
+    },
     renderChart() {
       const ctx = document.getElementById("vendasMensais").getContext("2d");
       new Chart(ctx, {
@@ -115,7 +128,6 @@ export default {
 
 <style>
 #table-entradas-saidas th {
-  width: 11rem;
-  text-align: center;
+  text-align: left; /* Ajuste para alinhamento */
 }
 </style>
