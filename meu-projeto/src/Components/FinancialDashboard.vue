@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
-    <header class="bg-red-950 text-white py-4 rounded-lg flex justify-center items-center mb-8">
-        <h1 class="text-3xl font-bold">Dashboard Financeiro - Exprezzo Cafeteria</h1>
+    <header class="bg-red-950 text-white py-4 rounded-b-lg flex justify-center items-center mb-4">
+        <h1 class="text-xl md:text-2xl font-bold ">Dashboard Financeiro | Exprezzo Cafeteria</h1>
         <img src="@/assets/logo_cafe_com_escrita_exprezzo.png" alt="Logo da Exprezzo Cafeteria" class="w-30 h-20 ml-4" />
       </header>
 
