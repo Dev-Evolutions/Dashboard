@@ -6,6 +6,7 @@
     </header>
 
     <main>
+      <div></div>
       <table id="table-entradas-saidas" class="flex flex-col">
         <thead>
           <tr class="text-md flex flex-row bg-gray-200">
@@ -16,21 +17,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(entrada, index) in entradas" :key="index" class="bg-green-100 flex flex-row pt-2 text-center" id="entradas">
+          <tr v-for="(entrada, index) in entradas" :key="index" class="bg-green-100 flex flex-row pt-2 text-center " id="entradas">
             <td class="w-24 h-12">{{ entrada.descricao }}</td>
             <td class="w-24 h-12">Entrada</td>
             <td class="w-24 h-12">
-              <input type="number" v-model="entrada.quantidade" class="w-12 text-center" min="0" @input="atualizarValorEntrada" />
+              <input type="number" v-model="entrada.quantidade" class="w-12 text-center"/>
             </td>
-            <td class="w-24 h-12">{{ calcularValorEntrada(entrada) }}</td>
+            <td class="w-24 h-12">{{ entrada.valor }}</td>
           </tr>
           <tr v-for="(saida, index) in saidas" :key="index" class="bg-red-100 flex flex-row pt-2 text-center">
             <td class="w-24 h-12">{{ saida.descricao }}</td>
             <td class="w-24 h-12">Saída</td>
             <td class="w-24 h-12">
-              <input type="number" v-model="saida.quantidade" class="w-12 text-center" min="0" @input="atualizarValorSaida" />
+              <input type="number" v-model="saida.quantidade" class="w-12 text-center"/>
             </td>
-            <td class="w-24 h-12">{{ calcularValorSaida(saida) }}</td>
+            <td class="w-24 h-12">{{ saida.valor }}</td>
           </tr>
         </tbody>
       </table>
@@ -54,37 +55,28 @@ export default {
   data() {
     return {
       entradas: [
-        { descricao: "Venda de Café", valorUnitario: 15, quantidade: 200 },
-        { descricao: "Venda de Produtos", valorUnitario: 14, quantidade: 500 },
-        { descricao: "Serviços Extras", valorUnitario: 50, quantidade: 150 }
+        { descricao: "Venda de Café", valor: 3000, quantidade: 200 },
+        { descricao: "Venda de Produtos", valor: 7000, quantidade: 500 },
+        { descricao: "Serviços Extras", valor: 5000, quantidade: 150 }
       ],
       saidas: [
-        { descricao: "Compra de Ingredientes", valorUnitario: 40, quantidade: 100 },
-        { descricao: "Manutenção", valorUnitario: 200, quantidade: 5 },
-        { descricao: "Salários", valorUnitario: 150, quantidade: 20 }
+        { descricao: "Compra de Ingredientes", valor: 4000, quantidade: 100 },
+        { descricao: "Manutenção", valor: 2000, quantidade: 5 },
+        { descricao: "Salários", valor: 3000, quantidade: 20 }
       ]
     };
   },
   computed: {
     saldo() {
-      const totalEntradas = this.entradas.reduce((total, entrada) => total + this.calcularValorEntrada(entrada), 0);
-      const totalSaidas = this.saidas.reduce((total, saida) => total + this.calcularValorSaida(saida), 0);
+      const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor, 0);
+      const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor, 0);
       return totalEntradas - totalSaidas;
     }
   },
+  mounted() {
+    this.renderChart();
+  },
   methods: {
-    calcularValorEntrada(entrada) {
-      return entrada.valorUnitario * entrada.quantidade;
-    },
-    calcularValorSaida(saida) {
-      return saida.valorUnitario * saida.quantidade;
-    },
-    atualizarValorEntrada() {
-      // Lógica de atualização não é necessária aqui
-    },
-    atualizarValorSaida() {
-      // Lógica de atualização não é necessária aqui
-    },
     renderChart() {
       const ctx = document.getElementById("vendasMensais").getContext("2d");
       new Chart(ctx, {
@@ -122,7 +114,7 @@ export default {
 </script>
 
 <style>
-#table-entradas-saidas th {
+#table-entradas-saidas th{
   width: 11rem;
   text-align: center;
 }
