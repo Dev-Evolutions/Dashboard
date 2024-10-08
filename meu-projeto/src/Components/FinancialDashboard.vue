@@ -6,8 +6,6 @@
     </header>
 
     <main class="flex flex-1 overflow-hidden">
-      
-      <!-- Adicionando o aside visível em todas as telas -->
       <aside class="w-1/3 sm:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
         <img src="" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
@@ -17,13 +15,13 @@
 
       <div class="flex-grow p-1 overflow-auto">
         <section class="grid grid-cols-2 gap-4 mb-8">
-          <div class="bg-green-100 p-4 rounded-lg text-center">
+          <div class="bg-green-100 p-4 rounded-lg">
             <h2 class="text-lg font-bold">Clientes Atendidos</h2>
             <p class="text-2xl font-bold text-green-600">{{ clientesAtendidos }}</p>
           </div>
-          <div class="bg-green-100 p-4 rounded-lg text-center">
+          <div class="bg-green-100 p-4 rounded-lg">
             <h2 class="text-lg font-bold">Total de Vendas</h2>
-            <p class="text-2xl font-bold text-green-600">{{ totalVendas }} R$</p>
+            <p class="text-2xl font-bold text-green-600">R$ {{ totalVendas }}</p>
           </div>
         </section>
 
@@ -43,7 +41,7 @@
               <td class="p-1">
                 <input type="number" v-model.number="entrada.quantidade" class="w-14 text-center text-xs p-1"/>
               </td>
-              <td class="p-1">{{ (entrada.valor * entrada.quantidade).toFixed(2) }} R$</td>
+              <td class="p-1">R$ {{ (entrada.valor * entrada.quantidade).toFixed(2) }}</td>
             </tr>
             <tr v-for="(saida, index) in saidas" :key="index" class="bg-red-100 text-center">
               <td class="p-1">{{ saida.descricao }}</td>
@@ -51,13 +49,13 @@
               <td class="p-1">
                 <input type="number" v-model.number="saida.quantidade" class="w-14 text-center text-xs p-1"/>
               </td>
-              <td class="p-1">{{ (saida.valor * saida.quantidade).toFixed(2) }} R$</td>
+              <td class="p-1">R$ {{ (saida.valor * saida.quantidade).toFixed(2) }}</td>
             </tr>
           </tbody>
         </table>
 
         <div class="mt-2 flex justify-center">
-          <h2 class="text-xs font-bold text-green-600">Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
+          <h2 class="text-xs font-bold text-green-600">Saldo do Fluxo de Caixa: R$ {{ saldo.toFixed(2) }}</h2>
         </div>
 
         <div class="mt-2">
@@ -75,8 +73,8 @@ import Chart from "chart.js/auto";
 export default {
   data() {
     return {
-      clientesAtendidos: 150, // Exemplo de valor
-      totalVendas: 20000, // Exemplo de valor
+      clientesAtendidos: 150,
+      totalVendas: 20000,
       entradas: [
         { descricao: "Venda de Café", valor: 15, quantidade: 200 },
         { descricao: "Venda de Produtos", valor: 30, quantidade: 500 },
