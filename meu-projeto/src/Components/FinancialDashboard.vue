@@ -6,42 +6,42 @@
     </header>
 
     <main>
-      <table>
+      <div></div>
+      <table id="table-entradas-saidas" class="flex flex-col">
         <thead>
-          <tr>
+          <tr class="text-md flex flex-row bg-gray-200">
             <th>Descrição</th>
             <th>Tipo</th>
             <th>Quantidade</th> 
-            <th>Valor (R$)</th>
-            <th>Ações</th>
+            <th>Valor</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(entrada, index) in entradas" :key="index">
-            <td>{{ entrada.descricao }}</td>
-            <td>Entrada</td>
-            <td>
-              <input type="number" v-model="entrada.quantidade" />
+          <tr v-for="(entrada, index) in entradas" :key="index" class="bg-green-100 flex flex-row pt-2 text-center " id="entradas">
+            <td class="w-24">{{ entrada.descricao }}</td>
+            <td class="w-24">Entrada</td>
+            <td class="w-24">
+              <input type="number" v-model="entrada.quantidade" class="w-11 text-center"/>
             </td>
-            <td>{{ entrada.valor }}</td>
+            <td class="w-24">{{ entrada.valor }}</td>
           </tr>
-          <tr v-for="(saida, index) in saidas" :key="index">
-            <td>{{ saida.descricao }}</td>
-            <td>Saída</td>
-            <td>
-              <input type="number" v-model="saida.quantidade" />
+          <tr v-for="(saida, index) in saidas" :key="index" class="bg-red-100 flex flex-row pt-2 text-center">
+            <td class="w-24">{{ saida.descricao }}</td>
+            <td class="w-24">Saída</td>
+            <td class="w-24">
+              <input type="number" v-model="saida.quantidade" class="w-11 text-center"/>
             </td>
-            <td>{{ saida.valor }}</td>
+            <td class="w-24">{{ saida.valor }}</td>
           </tr>
         </tbody>
       </table>
 
-      <div>
-        <h2>Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
+      <div class="mt-8">
+        <h2 class="text-2xl font-bold text-green-600">Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
       </div>
 
-      <div>
-        <h3>Vendas Mensais</h3>
+      <div class="mt-8">
+        <h3 class="bg-red-950 text-white py-4 rounded-lg flex justify-center items-center text-3xl font-bold">Vendas Mensais</h3>
         <canvas id="vendasMensais"></canvas>
       </div>
     </main>
@@ -114,4 +114,8 @@ export default {
 </script>
 
 <style>
+#table-entradas-saidas th{
+  width: 11rem;
+  text-align: center;
+}
 </style>
