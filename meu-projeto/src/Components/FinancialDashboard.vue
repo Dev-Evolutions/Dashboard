@@ -6,7 +6,7 @@
     </header>
 
     <main class="flex flex-1 overflow-hidden">
-      <aside class="w-1/3 sm:w-1/6 bg-red-950 text-white p-4 flex flex-col items-center">
+      <aside class="w-1/3 sm:w-1/6 bg-red-950 rounded-t-lg text-white p-4 flex flex-col items-center">
         <img src="@/assets/usuario.jpg" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
         <p class="text-xs text-gray-300 mb-2">Administrador</p>
