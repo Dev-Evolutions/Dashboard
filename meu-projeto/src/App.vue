@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <UserLogin />
+    <router-view />
   </div>
 </template>
 
 <script>
-import UserLogin from './Components/UserLogin.vue';
-
 export default {
-  components: {
-    UserLogin
-  }
-}
+  
+};
 </script>
 
-<style></style>
+<style>
+#app {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+</style>

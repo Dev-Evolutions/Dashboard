@@ -6,7 +6,7 @@
       </header>
 
     <main class="flex flex-1 overflow-hidden">
-      <aside class="w-1/3 sm:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
+      <aside class="w-1/3 sm:w-1/6 bg-red-950 text-white p-4 flex flex-col items-center">
         <img src="@/assets/usuario.jpg" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
         <p class="text-xs text-gray-300 mb-2">Administrador</p>
@@ -92,15 +92,18 @@ export default {
       const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor * entrada.quantidade, 0);
       const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor * saida.quantidade, 0);
       return totalEntradas - totalSaidas;
-    },
+    }
+  },
+  created() {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      this.$router.push({ name: 'UserLogin' });
+    }
   },
   mounted() {
     this.renderChart();
   },
   methods: {
-    logout() {
-      alert("Você saiu do sistema!");
-    },
     renderChart() {
       const ctx = document.getElementById("vendasMensais").getContext("2d");
       new Chart(ctx, {
@@ -113,28 +116,38 @@ export default {
               data: [50, 100, 150, 200, 180, 220],
               backgroundColor: "rgba(75, 192, 192, 0.2)",
               borderColor: "rgba(75, 192, 192, 1)",
-              borderWidth: 1,
+              borderWidth: 1
             },
             {
               label: "Produtos Vendidos (unidades)",
               data: [80, 90, 100, 150, 140, 160],
               backgroundColor: "rgba(153, 102, 255, 0.2)",
               borderColor: "rgba(153, 102, 255, 1)",
-              borderWidth: 1,
-            },
-          ],
+              borderWidth: 1
+            }
+          ]
         },
         options: {
           scales: {
             y: {
-              beginAtZero: true,
-            },
-          },
-        },
+              beginAtZero: true
+            }
+          }
+        }
       });
     },
-  },
-};
+    checkAuthentication() {
+      const isAuthenticated = localStorage.getItem('isAuthenticated');
+      if (!isAuthenticated) {
+        this.$router.push({ name: 'UserLogin' });
+      }
+    },
+    logout() {
+      localStorage.removeItem('isAuthenticated');
+      this.$router.push({ name: 'UserLogin' });
+    }
+  }
+};  
 </script>
 
 <style>

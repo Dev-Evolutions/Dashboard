@@ -18,40 +18,25 @@
             <img src="logo_cafe_com_escrita.png" alt="Exprezzo Cafe">
         </form>
     </div>
-    <div v-else>
-        <FinancialDashboard/>
-    </div>
 </template>
 
 <script>
-import FinancialDashboard from './FinancialDashboard.vue';
-
 export default {
-    data() {
-        return {
-            username: '',
-            password: '',
-            isAuthenticated: false
-        };
-    },
-    methods: {
-        login() {
-            if (this.username === 'admin' && this.password === '1234') {
-                this.isAuthenticated = true;
-            } else {
-                alert('Credenciais inválidas.');
-            }
-        }
-    },
-    components: {
-    FinancialDashboard
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  methods: {
+    login() {
+      if (this.username === 'admin' && this.password === '1234') {
+        localStorage.setItem('isAuthenticated', 'true'); 
+        this.$router.push({ name: 'Dashboard' }); 
+      } else {
+        alert('Credenciais inválidas.');
+      }
+    }
   }
-    
 };
 </script>
-
-<style scoped>
-.bg-red-950 {
-    background-color: #3b1f1f;
-}
-</style>
