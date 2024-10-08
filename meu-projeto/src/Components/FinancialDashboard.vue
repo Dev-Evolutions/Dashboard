@@ -6,14 +6,27 @@
     </header>
 
     <main class="flex flex-1 overflow-hidden">
-      <aside class="hidden md:flex md:w-1/4 bg-red-950 text-white p-4 flex-col items-center">
+      
+      <!-- Adicionando o aside visível em todas as telas -->
+      <aside class="w-1/3 sm:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
         <img src="" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
         <p class="text-xs text-gray-300 mb-2">Administrador</p>
         <button @click="logout" class="bg-green-500 text-white text-xs px-3 py-1 rounded mt-1 hover:bg-green-600">Sair</button>
       </aside>
 
-      <div class="flex-grow p-2 overflow-auto">
+      <div class="flex-grow p-1 overflow-auto">
+        <section class="grid grid-cols-2 gap-4 mb-8">
+          <div class="bg-green-100 p-4 rounded-lg text-center">
+            <h2 class="text-lg font-bold">Clientes Atendidos</h2>
+            <p class="text-2xl font-bold text-green-600">{{ clientesAtendidos }}</p>
+          </div>
+          <div class="bg-green-100 p-4 rounded-lg text-center">
+            <h2 class="text-lg font-bold">Total de Vendas</h2>
+            <p class="text-2xl font-bold text-green-600">{{ totalVendas }} R$</p>
+          </div>
+        </section>
+
         <table id="table-entradas-saidas" class="w-full text-xs">
           <thead>
             <tr class="text-xs bg-gray-200">
@@ -62,6 +75,8 @@ import Chart from "chart.js/auto";
 export default {
   data() {
     return {
+      clientesAtendidos: 150, // Exemplo de valor
+      totalVendas: 20000, // Exemplo de valor
       entradas: [
         { descricao: "Venda de Café", valor: 15, quantidade: 200 },
         { descricao: "Venda de Produtos", valor: 30, quantidade: 500 },
