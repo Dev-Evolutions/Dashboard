@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
-    <header class="p-2">
-      <h1 class="text-lg">Dashboard Financeiro - Exprezzo Cafeteria</h1>
-      <img src="" alt="Logo da Exprezzo Cafeteria" class="w-16 h-16" />
-    </header>
+    <header class="bg-red-950 text-white py-4 rounded-lg flex justify-center items-center mb-8">
+        <h1 class="text-3xl font-bold">Dashboard Financeiro - Exprezzo Cafeteria</h1>
+        <img src="@/assets/logo_cafe_com_escrita_exprezzo.png" alt="Logo da Exprezzo Cafeteria" class="w-30 h-20 ml-4" />
+      </header>
 
     <main class="flex flex-1 overflow-hidden">
-      <aside class="w-1/3 sm:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
-        <img src="" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
+      <aside class="w-1/3 sm:w-1/6 bg-red-950 text-white p-4 flex flex-col items-center">
+        <img src="@/assets/usuario.jpg" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
         <p class="text-xs text-gray-300 mb-2">Administrador</p>
         <button @click="logout" class="bg-green-500 text-white text-xs px-3 py-1 rounded mt-1 hover:bg-green-600">Sair</button>
@@ -92,15 +92,18 @@ export default {
       const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor * entrada.quantidade, 0);
       const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor * saida.quantidade, 0);
       return totalEntradas - totalSaidas;
-    },
+    }
+  },
+  created() {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      this.$router.push({ name: 'UserLogin' });
+    }
   },
   mounted() {
     this.renderChart();
   },
   methods: {
-    logout() {
-      alert("Você saiu do sistema!");
-    },
     renderChart() {
       const ctx = document.getElementById("vendasMensais").getContext("2d");
       new Chart(ctx, {
@@ -113,28 +116,38 @@ export default {
               data: [50, 100, 150, 200, 180, 220],
               backgroundColor: "rgba(75, 192, 192, 0.2)",
               borderColor: "rgba(75, 192, 192, 1)",
-              borderWidth: 1,
+              borderWidth: 1
             },
             {
               label: "Produtos Vendidos (unidades)",
               data: [80, 90, 100, 150, 140, 160],
               backgroundColor: "rgba(153, 102, 255, 0.2)",
               borderColor: "rgba(153, 102, 255, 1)",
-              borderWidth: 1,
-            },
-          ],
+              borderWidth: 1
+            }
+          ]
         },
         options: {
           scales: {
             y: {
-              beginAtZero: true,
-            },
-          },
-        },
+              beginAtZero: true
+            }
+          }
+        }
       });
     },
-  },
-};
+    checkAuthentication() {
+      const isAuthenticated = localStorage.getItem('isAuthenticated');
+      if (!isAuthenticated) {
+        this.$router.push({ name: 'UserLogin' });
+      }
+    },
+    logout() {
+      localStorage.removeItem('isAuthenticated');
+      this.$router.push({ name: 'UserLogin' });
+    }
+  }
+};  
 </script>
 
 <style>
