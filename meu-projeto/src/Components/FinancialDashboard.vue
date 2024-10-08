@@ -1,27 +1,26 @@
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen overflow-hidden">
     <header class="p-2">
       <h1 class="text-lg">Dashboard Financeiro - Exprezzo Cafeteria</h1>
       <img src="" alt="Logo da Exprezzo Cafeteria" class="w-16 h-16" />
     </header>
 
     <main class="flex flex-1 overflow-hidden">
-      
-      <aside class="w-1/3 md:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
+      <aside class="hidden md:flex md:w-1/4 bg-red-950 text-white p-4 flex-col items-center">
         <img src="" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
         <p class="text-xs text-gray-300 mb-2">Administrador</p>
         <button @click="logout" class="bg-green-500 text-white text-xs px-3 py-1 rounded mt-1 hover:bg-green-600">Sair</button>
       </aside>
 
-      <div class="flex-grow p-1 overflow-auto">
-        <table id="table-entradas-saidas" class="w-full max-w-md text-xs"> <!-- Tamanho da fonte reduzido -->
+      <div class="flex-grow p-2 overflow-auto">
+        <table id="table-entradas-saidas" class="w-full text-xs">
           <thead>
             <tr class="text-xs bg-gray-200">
-              <th class="text-left p-1 w-1/3">Descrição</th>
-              <th class="text-left p-1 w-1/4">Tipo</th>
-              <th class="text-left p-1 w-1/4">Quantidade</th>
-              <th class="text-left p-1 w-1/4">Valor</th>
+              <th class="text-left p-1">Descrição</th>
+              <th class="text-left p-1">Tipo</th>
+              <th class="text-left p-1">Quantidade</th>
+              <th class="text-left p-1">Valor</th>
             </tr>
           </thead>
           <tbody>
@@ -29,7 +28,7 @@
               <td class="p-1">{{ entrada.descricao }}</td>
               <td class="p-1">Entrada</td>
               <td class="p-1">
-                <input type="number" v-model.number="entrada.quantidade" class="w-14 text-center text-xs p-1"/> <!-- Largura e padding do input reduzidos -->
+                <input type="number" v-model.number="entrada.quantidade" class="w-14 text-center text-xs p-1"/>
               </td>
               <td class="p-1">{{ (entrada.valor * entrada.quantidade).toFixed(2) }} R$</td>
             </tr>
@@ -37,7 +36,7 @@
               <td class="p-1">{{ saida.descricao }}</td>
               <td class="p-1">Saída</td>
               <td class="p-1">
-                <input type="number" v-model.number="saida.quantidade" class="w-14 text-center text-xs p-1"/> <!-- Largura e padding do input reduzidos -->
+                <input type="number" v-model.number="saida.quantidade" class="w-14 text-center text-xs p-1"/>
               </td>
               <td class="p-1">{{ (saida.valor * saida.quantidade).toFixed(2) }} R$</td>
             </tr>
@@ -50,7 +49,7 @@
 
         <div class="mt-2">
           <h3 class="bg-red-950 text-white py-1 rounded-lg flex justify-center items-center text-sm font-bold">Vendas Mensais</h3>
-          <canvas id="vendasMensais" class="w-full h-32"></canvas> <!-- Altura do gráfico ajustada -->
+          <canvas id="vendasMensais" class="w-full h-32"></canvas>
         </div>
       </div>
     </main>
@@ -87,7 +86,6 @@ export default {
   },
   methods: {
     logout() {
-      // Lógica para sair do sistema
       alert('Você saiu do sistema!');
     },
     renderChart() {
@@ -128,6 +126,6 @@ export default {
 
 <style>
 #table-entradas-saidas th {
-  text-align: left; /* Ajuste para alinhamento */
+  text-align: left;
 }
 </style>
