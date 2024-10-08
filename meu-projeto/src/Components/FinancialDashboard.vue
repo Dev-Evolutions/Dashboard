@@ -21,7 +21,7 @@
             <td class="w-24">{{ entrada.descricao }}</td>
             <td class="w-24">Entrada</td>
             <td class="w-24">
-              <input type="number" v-model="entrada.quantidade" class="w-11 text-center"/>
+              <input type="number" v-model="entrada.quantidade" class="w-12 text-center"/>
             </td>
             <td class="w-24">{{ entrada.valor }}</td>
           </tr>
@@ -29,7 +29,7 @@
             <td class="w-24">{{ saida.descricao }}</td>
             <td class="w-24">Saída</td>
             <td class="w-24">
-              <input type="number" v-model="saida.quantidade" class="w-11 text-center"/>
+              <input type="number" v-model="saida.quantidade" class="w-12 text-center"/>
             </td>
             <td class="w-24">{{ saida.valor }}</td>
           </tr>
