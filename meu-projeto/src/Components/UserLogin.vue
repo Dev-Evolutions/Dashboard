@@ -17,9 +17,13 @@
             </button>
         </form>
     </div>
+    <div v-else>
+        <Dashboard/>
+    </div>
 </template>
 
 <script>
+import Dashboard from './Dashboard.vue';
 
 export default {
     data() {
@@ -37,7 +41,10 @@ export default {
                 alert('Credenciais inválidas.');
             }
         }
-    }
+    },
+    components: {
+    Dashboard
+  }
     
 };
 </script>
