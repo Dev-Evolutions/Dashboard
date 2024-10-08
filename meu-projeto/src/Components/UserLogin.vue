@@ -1,14 +1,14 @@
 <template>
-    <div class="login container mx-auto py-8 bg-red-950 min-h-screen items-center justify-center" v-if="!isAuthenticated">
-        <h1 class="text-3xl font-bold text-center mb-6 text-white">Login</h1>
-        <form class="max-w-md mx-auto r flex flex-col items-center" @submit.prevent="login">
-            <div class="mb-4 w-[100%] p-[2em]">
-                <label for="username" class="block text-white">Usuário:</label>
+    <div class="login container mx-auto py-8 bg-red-950 min-h-screen items-center justify-center min-w-[100%]" v-if="!isAuthenticated">
+        <h1 class="text-3xl font-bold text-center mb-6 text-white" >Login</h1>
+        <form class="max-w-md mx-auto r flex flex-col items-center gap-8" @submit.prevent="login">
+            <div class="w-[20em]">
+                <label for="username" class="block text-white text-left">Usuário:</label>
                 <input type="text" id="username" v-model="username"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md" />
             </div>
-            <div class="mb-4 w-[100%] p-[2em]">
-                <label for="password" class="block text-white">Senha:</label>
+            <div class="w-[20em]">
+                <label for="password" class="block text-white text-left">Senha:</label>
                 <input type="password" id="password" v-model="password"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md" />
             </div>
