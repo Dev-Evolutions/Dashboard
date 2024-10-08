@@ -62,6 +62,45 @@
           <h3 class="bg-red-950 text-white py-1 rounded-lg flex justify-center items-center text-sm font-bold">Vendas Mensais</h3>
           <canvas id="vendasMensais" class="w-full h-32"></canvas>
         </div>
+  <div>
+    <header>
+      <h1>Dashboard Financeiro - Exprezzo Cafeteria</h1>
+      <img src="" alt="Logo da Exprezzo Cafeteria"/>
+    </header>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Quantidade</th> 
+            <th>Valor (R$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(entrada, index) in entradas" :key="index">
+            <td>{{ entrada.descricao }}</td>
+            <td>Entrada</td>
+            <td>{{ entrada.quantidade }}</td> 
+            <td>{{ entrada.valor }}</td>
+          </tr>
+          <tr v-for="(saida, index) in saidas" :key="index">
+            <td>{{ saida.descricao }}</td>
+            <td>Saída</td>
+            <td>{{ saida.quantidade }}</td> 
+            <td>{{ saida.valor }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div>
+        <h2>Saldo do Fluxo de Caixa: {{ saldo }} R$</h2>
+      </div>
+
+      <div>
+        <h3>Vendas Mensais</h3>
+        <canvas id="vendasMensais"></canvas>
       </div>
     </main>
   </div>
@@ -91,6 +130,8 @@ export default {
     saldo() {
       const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor * entrada.quantidade, 0);
       const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor * saida.quantidade, 0);
+      const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor, 0);
+      const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor, 0);
       return totalEntradas - totalSaidas;
     }
   },
