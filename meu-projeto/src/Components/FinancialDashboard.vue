@@ -98,6 +98,12 @@ export default {
       return totalEntradas - totalSaidas;
     },
   },
+  created() {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      this.$router.push({ name: 'UserLogin' });
+    }
+  },
   mounted() {
     this.renderChart();
   },
@@ -134,6 +140,16 @@ export default {
         },
       });
     },
+    checkAuthentication() {
+      const isAuthenticated = localStorage.getItem('isAuthenticated');
+      if (!isAuthenticated) {
+        this.$router.push({ name: 'UserLogin' });
+      }
+    },
+    logout() {
+      localStorage.removeItem('isAuthenticated');
+      this.$router.push({ name: 'UserLogin' });
+    }
   },
 };
 </script>
