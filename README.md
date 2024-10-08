@@ -15,3 +15,5 @@ Este projeto é um **Dashboard Financeiro** desenvolvido para a **Exprezzo Cafet
 - **Vue.js**: Framework JavaScript para construção de interfaces de usuário dinâmicas.
 - **Tailwind CSS**: Framework CSS para estilização responsiva e personalização do layout.
 - **Chart.js**: Biblioteca para a geração dos gráficos de vendas.
+
+#Link para acessar o DashBoard: https://main.dmhgl9z1nfp1.amplifyapp.com
