@@ -2,7 +2,7 @@
   <div>
     <header>
       <h1>Dashboard Financeiro - Exprezzo Cafeteria</h1>
-      <img src="" alt="Logo da Exprezzo Cafeteria"/>
+      <img src="caminho/para/logo.png" alt="Logo da Exprezzo Cafeteria" />
     </header>
 
     <main>
@@ -21,17 +21,17 @@
             <td class="w-24 h-12">{{ entrada.descricao }}</td>
             <td class="w-24 h-12">Entrada</td>
             <td class="w-24 h-12">
-              <input type="number" v-model="entrada.quantidade" class="w-12 text-center"/>
+              <input type="number" v-model.number="entrada.quantidade" class="w-12 text-center"/>
             </td>
-            <td class="w-24 h-12">{{ entrada.valor }}</td>
+            <td class="w-24 h-12">{{ (entrada.preco * entrada.quantidade).toFixed(2) }} R$</td>
           </tr>
           <tr v-for="(saida, index) in saidas" :key="index" class="bg-red-100 flex flex-row pt-2 text-center">
             <td class="w-24 h-12">{{ saida.descricao }}</td>
             <td class="w-24 h-12">Saída</td>
             <td class="w-24 h-12">
-              <input type="number" v-model="saida.quantidade" class="w-12 text-center"/>
+              <input type="number" v-model.number="saida.quantidade" class="w-12 text-center"/>
             </td>
-            <td class="w-24 h-12">{{ saida.valor }}</td>
+            <td class="w-24 h-12">{{ (saida.preco * saida.quantidade).toFixed(2) }} R$</td>
           </tr>
         </tbody>
       </table>
@@ -55,22 +55,22 @@ export default {
   data() {
     return {
       entradas: [
-        { descricao: "Venda de Café", valor: 3000, quantidade: 200 },
-        { descricao: "Venda de Produtos", valor: 7000, quantidade: 500 },
-        { descricao: "Serviços Extras", valor: 5000, quantidade: 150 }
+        { descricao: "Venda de Café", preco: 15, quantidade: 200 },
+        { descricao: "Venda de Produtos", preco: 20, quantidade: 500 },
+        { descricao: "Serviços Extras", preco: 50, quantidade: 150 }
       ],
       saidas: [
-        { descricao: "Compra de Ingredientes", valor: 4000, quantidade: 100 },
-        { descricao: "Manutenção", valor: 2000, quantidade: 5 },
-        { descricao: "Salários", valor: 3000, quantidade: 20 }
+        { descricao: "Compra de Ingredientes", preco: 40, quantidade: 100 },
+        { descricao: "Manutenção", preco: 400, quantidade: 5 },
+        { descricao: "Salários", preco: 150, quantidade: 20 }
       ]
     };
   },
   computed: {
     saldo() {
-      const totalEntradas = this.entradas.reduce((total, entrada) => total + entrada.valor, 0);
-      const totalSaidas = this.saidas.reduce((total, saida) => total + saida.valor, 0);
-      return totalEntradas - totalSaidas;
+      const totalEntradas = this.entradas.reduce((total, entrada) => total + (entrada.preco * entrada.quantidade), 0);
+      const totalSaidas = this.saidas.reduce((total, saida) => total + (saida.preco * saida.quantidade), 0);
+      return (totalEntradas - totalSaidas).toFixed(2);
     }
   },
   mounted() {
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style>
-#table-entradas-saidas th{
+#table-entradas-saidas th {
   width: 11rem;
   text-align: center;
 }
