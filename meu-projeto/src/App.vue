@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <UserLogin />
+    <!-- <UserLogin /> -->
+     <FinancialDashboard/>
   </div>
 </template>
 
 <script>
-import UserLogin from './Components/UserLogin.vue';
+import FinancialDashboard from './Components/FinancialDashboard.vue';
+// import UserLogin from './Components/UserLogin.vue';
 
 export default {
   components: {
-    UserLogin
+    // UserLogin
+    FinancialDashboard
   }
 }
 </script>
