@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col h-screen overflow-hidden">
-    <header class="p-2">
-      <h1 class="text-lg">Dashboard Financeiro - Exprezzo Cafeteria</h1>
-      <img src="" alt="Logo da Exprezzo Cafeteria" class="w-16 h-16" />
-    </header>
+    <header class="bg-red-950 text-white py-4 rounded-lg flex justify-center items-center mb-8">
+        <h1 class="text-3xl font-bold">Dashboard Financeiro - Exprezzo Cafeteria</h1>
+        <img src="@/assets/logo_cafe_com_escrita_exprezzo.png" alt="Logo da Exprezzo Cafeteria" class="w-30 h-20 ml-4" />
+      </header>
 
     <main class="flex flex-1 overflow-hidden">
       <aside class="w-1/3 sm:w-1/4 bg-red-950 text-white p-4 flex flex-col items-center">
-        <img src="" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
+        <img src="@/assets/usuario.jpg" alt="Foto do Usuário" class="w-20 h-20 rounded-full mb-2" />
         <h2 class="text-sm font-bold">Usuário: Enrico Gostoso</h2>
         <p class="text-xs text-gray-300 mb-2">Administrador</p>
         <button @click="logout" class="bg-green-500 text-white text-xs px-3 py-1 rounded mt-1 hover:bg-green-600">Sair</button>
